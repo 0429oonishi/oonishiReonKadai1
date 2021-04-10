@@ -17,12 +17,11 @@ final class TotalCalculationViewController: UIViewController {
     @IBOutlet private weak var resultLabel: UILabel!
     
     @IBAction private func calculateTotalButtonDidTapped(_ sender: Any) {
-        let num1 = Int(textField1.text!) ?? 0
-        let num2 = Int(textField2.text!) ?? 0
-        let num3 = Int(textField3.text!) ?? 0
-        let num4 = Int(textField4.text!) ?? 0
-        let num5 = Int(textField5.text!) ?? 0
-        let sum = num1 + num2 + num3 + num4 + num5
+        let textFields: [UITextField] = [textField1, textField2, textField3, textField4, textField5]
+        let sum = textFields
+            .map { $0.text ?? "" }
+            .map{ Int($0) ?? 0 }
+            .reduce(0, +)
         resultLabel.text = String(sum)
     }
     
